@@ -1,3 +1,4 @@
-# memories
-# memories
-# memories
+Memories 
+
+This application is live here : https://create-memory.netlify.app/
+
