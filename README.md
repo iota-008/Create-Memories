@@ -4,4 +4,4 @@ This application is live here : https://create-memory.netlify.app/
 
 SCREENSHOTS
 
-![alt text](https://github.com/iota-008/Create-Memories/blob/main/screenshots/1.jpg?raw=true)
+![alt text](https://github.com/iota-008/Create-Memories/blob/main/screenshots/Screenshot (240).png?raw=true)
