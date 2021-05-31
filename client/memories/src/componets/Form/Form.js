@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import useStyles from "./styles";
 import { TextField, Button, Typography, Paper } from "@material-ui/core";
 import FileBase from "react-file-base64";
+// import { ToastContainer } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { createPost, updatePost } from "../../actions/Posts";
 
@@ -51,18 +52,19 @@ const Form = ({ currentId, setCurrentId, user }) => {
 	return (
 		<Paper className={classes.paper}>
 			<form
-				autoComplete="off"
+				autoComplete='off'
 				noValidate
 				className={`${classes.root}  ${classes.form}`}
 				onSubmit={handleSubmit}
 			>
-				<Typography className={classes.formHeading} variant="h4">
-					{currentId ? "Editing" : "Create"} a Memory
+				<Typography className={classes.formHeading} variant='h4'>
+					{currentId ? "Editing" : "Create"} New Memory
 				</Typography>
 				<TextField
-					name="creator"
-					variant="outlined"
-					label="Creator"
+					className={classes.textField}
+					name='creator'
+					variant='outlined'
+					label='Creator'
 					fullWidth
 					value={postData.creator}
 					onChange={(e) =>
@@ -73,9 +75,10 @@ const Form = ({ currentId, setCurrentId, user }) => {
 					}
 				></TextField>
 				<TextField
-					name="title"
-					variant="outlined"
-					label="Title"
+					className={classes.textField}
+					name='title'
+					variant='outlined'
+					label='Title'
 					fullWidth
 					value={postData.title}
 					onChange={(e) =>
@@ -86,9 +89,10 @@ const Form = ({ currentId, setCurrentId, user }) => {
 					}
 				></TextField>
 				<TextField
-					name="message"
-					variant="outlined"
-					label="Message"
+					className={classes.textField}
+					name='message'
+					variant='outlined'
+					label='Message'
 					fullWidth
 					value={postData.message}
 					onChange={(e) =>
@@ -99,9 +103,10 @@ const Form = ({ currentId, setCurrentId, user }) => {
 					}
 				></TextField>
 				<TextField
-					name="tags"
-					variant="outlined"
-					label="Tags"
+					className={classes.textField}
+					name='tags'
+					variant='outlined'
+					label='Tags'
 					fullWidth
 					value={postData.tags}
 					onChange={(e) =>
@@ -113,7 +118,7 @@ const Form = ({ currentId, setCurrentId, user }) => {
 				></TextField>
 				<div className={classes.fileInput}>
 					<FileBase
-						type="file"
+						type='file'
 						multiple={false}
 						onDone={({ base64 }) =>
 							setPostData({
@@ -125,24 +130,26 @@ const Form = ({ currentId, setCurrentId, user }) => {
 				</div>
 				<Button
 					className={classes.buttonSubmit}
-					variant="contained"
-					color="primary"
-					size="large"
-					type="submit"
+					variant='contained'
+					color='primary'
+					size='large'
+					type='submit'
 					fullWidth
 				>
 					Submit
 				</Button>
 				<Button
-					variant="contained"
-					color="secondary"
-					size="large"
+					className={classes.buttonClear}
+					variant='contained'
+					color='secondary'
+					size='large'
 					onClick={clear}
 					fullWidth
 				>
 					Clear
 				</Button>
 			</form>
+			{/* <ToastContainer /> */}
 		</Paper>
 	);
 };

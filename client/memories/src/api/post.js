@@ -1,6 +1,7 @@
 import axios from "axios";
-// const url = "https://create-memory.herokuapp.com/posts";
+// const url = "http://localhost:5000/posts";
 const url = "https://create-your-memories.herokuapp.com/posts";
+
 var token = localStorage.getItem("auth-token");
 // console.log("token : ", token);
 
@@ -17,6 +18,10 @@ export const deletePost = (id) =>
 		headers: { "auth-token": `Bearer ${token}` },
 	});
 export const likePost = (id) =>
-	axios.patch(`${url}/${id}/likePost`,{},  {
-		headers: { "auth-token": `Bearer ${token}` },
-	});
+	axios.patch(
+		`${url}/${id}/likePost`,
+		{},
+		{
+			headers: { "auth-token": `Bearer ${token}` },
+		}
+	);

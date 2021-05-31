@@ -1,5 +1,5 @@
 import axios from "axios";
-// const url = "https://create-memory.herokuapp.com/posts";
+// const url = "http://localhost:5000/user";
 const url = "https://create-your-memories.herokuapp.com/user";
 
 export const registerUser = (userData) =>

@@ -10,6 +10,7 @@ export default (posts = [], action) => {
 	switch (action.type) {
 		case FETCH_ALL:
 			// console.log("fetched posts : ", action.payload);
+			// window.location.reload();
 			return action.payload;
 		case CREATE:
 			// console.log("created posts : ", action.payload);

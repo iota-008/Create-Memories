@@ -1,6 +1,7 @@
 import { createStore, applyMiddleware, compose } from "redux";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
+// import { ToastContainer } from "react-toastify";
 import { reducers } from "./reducers";
 import ReactDOM from "react-dom";
 import thunk from "redux-thunk";
@@ -13,6 +14,7 @@ ReactDOM.render(
 	<BrowserRouter>
 		<Provider store={store}>
 			<App />
+			{/* <ToastContainer /> */}
 		</Provider>
 	</BrowserRouter>,
 

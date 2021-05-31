@@ -11,12 +11,13 @@ import { getPosts } from "../../actions/Posts";
 import { logoutUser } from "../../actions/Users";
 import Post from "../Posts/Posts";
 import { useDispatch } from "react-redux";
+// import { ToastContainer } from "react-toastify";
 import Form from "../Form/Form";
 import useStyles from "./styles";
 // import { useSelector } from "react-redux";
 // import memories from "./images/memories.png";
 
-const Home = ({user}) => {
+const Home = ({ user }) => {
 	const dispatch = useDispatch();
 	const classes = useStyles();
 	const [currentId, setCurrentId] = useState(0);
@@ -24,35 +25,40 @@ const Home = ({user}) => {
 	useEffect(() => {
 		dispatch(getPosts());
 	}, [currentId, dispatch]);
+	// useEffect(() => {
+	// 	window.location.reload();
+	// }, [currentId]);
 
 	const handleLogout = () => {
 		dispatch(logoutUser());
 	};
 	return (
 		<React.Fragment>
-			<Container maxWidth="lg">
-				<AppBar className={classes.appBar} position="static" color="inherit">
-					<Typography className={classes.heading} variant="h2" align="center">
-						MEMORIES
-					</Typography>
-				</AppBar>
-				<Button
-					className={classes.buttonSubmit}
-					variant="contained"
-					color="primary"
-					size="large"
-					onClick={handleLogout}
-					fullWidth
-				>
-					Logout
-				</Button>
+			<Container maxWidth='lg'>
+				<div>
+					<AppBar className={classes.appBar} position='static' color='inherit'>
+						<Typography className={classes.heading} variant='h2' align='center'>
+							MEMORIES
+						</Typography>
+						<Button
+							className={classes.buttonLogout}
+							variant='contained'
+							// color='primary'
+							size='large'
+							onClick={handleLogout}
+							// fullWidth
+						>
+							Logout
+						</Button>
+					</AppBar>
+				</div>
 				<Grow in>
 					<Container>
 						<Grid
 							className={classes.mainContainer}
 							container
-							justify="space-between"
-							alignItems="stretch"
+							justify='space-between'
+							alignItems='stretch'
 							spacing={3}
 						>
 							<Grid item xs={12} sm={7}>
@@ -69,6 +75,7 @@ const Home = ({user}) => {
 					</Container>
 				</Grow>
 			</Container>
+			{/* <ToastContainer /> */}
 		</React.Fragment>
 	);
 };

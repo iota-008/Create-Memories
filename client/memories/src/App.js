@@ -1,5 +1,8 @@
 import Register from "./componets/UserForm/Register";
 import { useSelector } from "react-redux";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import Home from "./componets/Home/Home";
 import React from "react";
 
@@ -13,10 +16,12 @@ const App = () => {
 	return isLoggedIn ? (
 		<React.Fragment>
 			<Home user={user} />
+			<ToastContainer />
 		</React.Fragment>
 	) : (
 		<React.Fragment>
 			<Register />
+			<ToastContainer />
 		</React.Fragment>
 	);
 };

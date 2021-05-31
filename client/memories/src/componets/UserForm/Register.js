@@ -2,6 +2,7 @@ import { TextField, Button, Typography, Paper } from "@material-ui/core";
 // import { Redirect } from "react-router-dom";
 import { registerUser } from "../../actions/Users";
 import { useDispatch } from "react-redux";
+// import { ToastContainer } from "react-toastify";
 import React, { useState } from "react";
 import useStyles from "./styles";
 import Login from "./Login";
@@ -39,19 +40,20 @@ const Register = ({ currentId, setCurrentId }) => {
 	return (
 		<Paper className={classes.paper}>
 			<form
-				autoComplete="off"
+				autoComplete='off'
 				noValidate
 				className={`${classes.root}  ${classes.form}`}
 				onSubmit={handleSubmit}
 			>
-				<Typography className={classes.formHeading} variant="h4">
-					Register
+				<Typography className={classes.formHeading} variant='h4'>
+					Sign Up
 				</Typography>
 				<TextField
-					name="user-name"
-					variant="outlined"
-					label="UserName"
-					minLength="5"
+					className={classes.textField}
+					name='user-name'
+					variant='outlined'
+					label='UserName'
+					minLength='5'
 					fullWidth
 					value={userData.userName}
 					onChange={(e) =>
@@ -62,10 +64,11 @@ const Register = ({ currentId, setCurrentId }) => {
 					}
 				></TextField>
 				<TextField
-					name="email"
-					variant="outlined"
-					label="Email"
-					type="email"
+					className={classes.textField}
+					name='email'
+					variant='outlined'
+					label='Email'
+					type='email'
 					fullWidth
 					value={userData.email}
 					onChange={(e) =>
@@ -76,10 +79,11 @@ const Register = ({ currentId, setCurrentId }) => {
 					}
 				></TextField>
 				<TextField
-					name="password"
-					variant="outlined"
-					label="Password"
-					type="password"
+					className={classes.textField}
+					name='password'
+					variant='outlined'
+					label='Password'
+					type='password'
 					fullWidth
 					value={userData.password}
 					onChange={(e) =>
@@ -93,34 +97,40 @@ const Register = ({ currentId, setCurrentId }) => {
 				<Button
 					className={classes.buttonSubmit}
 					onClick={handleSubmit}
-					variant="contained"
-					color="primary"
-					size="large"
-					type="submit"
+					variant='contained'
+					color='primary'
+					size='large'
+					type='submit'
 					fullWidth
 				>
 					Submit
 				</Button>
 				<Button
-					variant="contained"
-					color="secondary"
-					size="large"
+					className={classes.buttonClear}
+					variant='contained'
+					// color='secondary'
+					size='large'
 					onClick={clear}
 					fullWidth
 				>
 					Clear
 				</Button>
+				<div>
+					<Typography color='textSecondary'>
+						Already have an account ?
+					</Typography>
+					<Button
+						className={classes.buttonSwitch}
+						variant='contained'
+						color='secondary'
+						onClick={() => setRedirect((redirect) => (redirect = true))}
+						fullWidth
+					>
+						Login
+					</Button>
+				</div>
 			</form>
-			<br />
-			<Typography color="textSecondary">Already a user ?</Typography>
-			<Button
-				variant="contained"
-				color="secondary"
-				onClick={() => setRedirect((redirect) => (redirect = true))}
-				fullWidth
-			>
-				Login
-			</Button>
+			{/* <ToastContainer /> */}
 		</Paper>
 	);
 };
