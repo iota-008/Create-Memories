@@ -1,0 +1,10 @@
+body {
+	background-color: #f3f3ee;
+	background-attachment: fixed;
+	background-size: cover;
+}
+
+code {
+	font-family: "cascadia code", source-code-pro, Menlo, Monaco, Consolas,
+		"Courier New", monospace;
+}
