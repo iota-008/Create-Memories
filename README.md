@@ -4,10 +4,11 @@
 
 # Memories
 
-This is an application where people can share their memories in form of posts with people around the world.
+Memories is an application where people can share their memories in form of posts with people around the world.
+This repository contains the code for frontend of the application
 
-## Live
-This application is live here : https://create-your-memory.netlify.app/
+## Live:
+This Application is live here : https://create-your-memory.netlify.app/
 
 ## Backend
 Applications Backend : https://github.com/iota-008/Create-Memories-Backend
@@ -23,6 +24,7 @@ Applications Backend : https://github.com/iota-008/Create-Memories-Backend
 ![Home Page](https://i.ibb.co/VYqRCqM/3.png)
 
 
+
 ## Tech Stack
 
 **Client:** React, Redux, MaterialUI, MakeStyles, Redux-Thunk
@@ -30,6 +32,10 @@ Applications Backend : https://github.com/iota-008/Create-Memories-Backend
 **Server:** Node, Express, JWT Authorization
 
 **Database:** MongoDB
+
+**Languages** Javascript, JSX, HTML, CSS
+
+
 
 
 ![Logo](https://i.ibb.co/qDG1gLL/Memories-logo.png)
