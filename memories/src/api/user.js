@@ -1,5 +1,5 @@
 import axios from "axios";
-const url = "https://create-your-memories.herokuapp.com/user";
+const url = "https://memories-backend-z796.onrender.com/user";
 
 
 //* api to register user
