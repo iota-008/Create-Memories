@@ -1,5 +1,5 @@
 import axios from "axios";
-const url = "https://create-your-memories.herokuapp.com/posts";
+const url = "https://memories-backend-z796.onrender.com/posts";
 var token = localStorage.getItem("auth-token");
 
 //* api for fetching posts
