@@ -19,6 +19,26 @@ export const getPosts = () => async (dispatch) => {
 	}
 };
 
+// Bookmark a post
+export const bookmarkPost = (id) => async (dispatch) => {
+    try {
+        const { data } = await api.addBookmark(id);
+        dispatch({ type: "BOOKMARK_ADD", payload: data.id || id });
+    } catch (error) {
+        toast.error(error.message);
+    }
+};
+
+// Remove bookmark
+export const unbookmarkPost = (id) => async (dispatch) => {
+    try {
+        const { data } = await api.removeBookmark(id);
+        dispatch({ type: "BOOKMARK_REMOVE", payload: data.id || id });
+    } catch (error) {
+        toast.error(error.message);
+    }
+};
+
 // Fetch a single post without auth (public route) and upsert into the posts array
 export const upsertSinglePostPublic = (id) => async (dispatch, getState) => {
     try {

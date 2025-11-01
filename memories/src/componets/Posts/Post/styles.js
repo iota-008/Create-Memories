@@ -161,6 +161,15 @@ export default makeStyles((theme) => ({
     background: 'linear-gradient(90deg, rgba(249,115,22,0.20) 0%, rgba(139,92,246,0.20) 100%)',
     color: '#F97316',
   },
+  bookmarkButton: {
+    background: 'linear-gradient(90deg, rgba(139,92,246,0.20) 0%, rgba(236,72,153,0.20) 100%)',
+    color: '#8B5CF6',
+  },
+  bookmarkActive: {
+    background: 'linear-gradient(90deg, #8B5CF6 0%, #EC4899 100%)',
+    color: '#fff',
+    boxShadow: '0 6px 16px rgba(139,92,246,0.35)'
+  },
   headerAction: {
     background: 'linear-gradient(90deg, #8B5CF6 0%, #EC4899 100%)',
     color: '#fff',

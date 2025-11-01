@@ -13,6 +13,12 @@ export const loginUser = ( userData ) => axios.post( `${ url }/login`, userData 
 //* api to logout user
 export const logoutUser = () => axios.post( `${ url }/logout` );
 
+//* api to fetch current profile
+export const getMe = (token) => axios.get(`${url}/me`, {
+    withCredentials: true,
+    headers: token ? { 'auth-token': token } : undefined,
+});
+
 //* api to request password reset
 export const forgotPassword = (email) => axios.post(`${url}/forgot`, { email });
 

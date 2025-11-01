@@ -25,3 +25,7 @@ export const fetchPublicPost = (id) => axios.get(`${url}/public/${id}`);
 //* api to react to posts (emoji reactions)
 export const reactToPost = (id, type) =>
   axios.patch(`${url}/${id}/react`, { type }, authHeaders());
+
+//* bookmark APIs
+export const addBookmark = (id) => axios.post(`${url}/${id}/bookmark`, {}, authHeaders());
+export const removeBookmark = (id) => axios.delete(`${url}/${id}/bookmark`, authHeaders());

@@ -18,9 +18,11 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 import ChatBubbleOutlineIcon from "@material-ui/icons/ChatBubbleOutline";
 import ShareIcon from "@material-ui/icons/Share";
+import BookmarkBorderIcon from "@material-ui/icons/BookmarkBorder";
+import BookmarkIcon from "@material-ui/icons/Bookmark";
 import useStyles from "./styles";
 import moment from "moment";
-import { deletePost, reactToPost } from "../../../actions/Posts";
+import { deletePost, reactToPost, bookmarkPost, unbookmarkPost } from "../../../actions/Posts";
 import { getComments } from "../../../actions/Comments";
 import { useSelector, useDispatch } from "react-redux";
 import Comments from "./Comments";
@@ -69,6 +71,8 @@ const Post = ({ post, setCurrentId }) => {
 		closeReactions();
 	};
 	const commentsState = useSelector((state) => state.comments);
+	const bookmarks = useSelector((state) => state.bookmarks) || [];
+	const isBookmarked = bookmarks.includes(post._id);
 	const commentsByPost = commentsState[post._id] || [];
 	const hasLiveComments = Object.prototype.hasOwnProperty.call(commentsState, post._id);
 	const commentCount = hasLiveComments
@@ -236,12 +240,19 @@ const Post = ({ post, setCurrentId }) => {
 					)}
 				</Popper>
 				<div style={{ flex: 1 }} />
-				<IconButton className={`${classes.actionButton} ${classes.commentButton}`} onClick={toggleComments} size="small" aria-label="comment" disabled={!user}>
-					<ChatBubbleOutlineIcon fontSize='small' />
-				</IconButton>
-				<IconButton className={`${classes.actionButton} ${classes.shareButton}`} onClick={handleShare} size="small" aria-label="share">
-					<ShareIcon fontSize='small' />
-				</IconButton>
+				<IconButton className={`${classes.actionButton} ${isBookmarked ? classes.bookmarkActive : classes.bookmarkButton}`} onClick={() => {
+                    if (!user) return;
+                    if (isBookmarked) dispatch(unbookmarkPost(post._id));
+                    else dispatch(bookmarkPost(post._id));
+                }} size="small" aria-label="bookmark" disabled={!user} title={isBookmarked ? 'Remove bookmark' : 'Bookmark'}>
+                    {isBookmarked ? <BookmarkIcon fontSize='small'/> : <BookmarkBorderIcon fontSize='small'/>}
+                </IconButton>
+                <IconButton className={`${classes.actionButton} ${classes.commentButton}`} onClick={toggleComments} size="small" aria-label="comment" disabled={!user}>
+                    <ChatBubbleOutlineIcon fontSize='small' />
+                </IconButton>
+                <IconButton className={`${classes.actionButton} ${classes.shareButton}`} onClick={handleShare} size="small" aria-label="share">
+                    <ShareIcon fontSize='small' />
+                </IconButton>
 			</CardActions>
 			{showComments && (
 				<div style={{ padding: "0 16px 16px" }}>

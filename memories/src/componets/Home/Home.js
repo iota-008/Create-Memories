@@ -18,6 +18,8 @@ import useStyles from "./styles";
 
 // Use MUI icons for consistency
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder';
+import BookmarkIcon from '@material-ui/icons/Bookmark';
 import { ThemeModeContext } from "../../theme";
 import Brightness4Icon from "@material-ui/icons/Brightness4";
 import Brightness7Icon from "@material-ui/icons/Brightness7";
@@ -34,6 +36,7 @@ const Home = () => {
 	const { mode, toggle } = React.useContext(ThemeModeContext);
 	const [layout, setLayout] = useState('list');
 	const isAuthenticated = Boolean(localStorage.getItem('auth-token'));
+    const [showBookmarksOnly, setShowBookmarksOnly] = useState(false);
 
 	useEffect(() => {
 		const params = new URLSearchParams(window.location.search);
@@ -83,6 +86,11 @@ const Home = () => {
 								<ExitToAppIcon fontSize="default" />
 							</IconButton>
 						)}
+						{isAuthenticated && (
+							<IconButton className={classes.headerIcon} onClick={() => setShowBookmarksOnly(prev => !prev)} size="small" aria-label="bookmarks">
+								{showBookmarksOnly ? <BookmarkIcon /> : <BookmarkBorderIcon />}
+							</IconButton>
+						)}
 					</div>
 				</div>
 			</AppBar>
@@ -97,7 +105,7 @@ const Home = () => {
 						spacing={4}
 					>
 						<Grid item xs={12} sm={12} md={8}>
-							<Post setCurrentId={setCurrentId} layout={layout} />
+							<Post setCurrentId={setCurrentId} layout={layout} filterBookmarksOnly={showBookmarksOnly} />
 						</Grid>
 						{isAuthenticated && (
 							<Grid item xs={12} sm={12} md={4}>
