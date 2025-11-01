@@ -36,3 +36,27 @@ export const logoutUser = () => async (dispatch) => {
 		toast.error(error.message);
 	}
 };
+
+//* action to request password reset
+export const forgotPassword = (email) => async () => {
+	try {
+		const { data } = await api.forgotPassword(email);
+		toast.success(data.message || "If the email exists, we'll send a reset link");
+		return data;
+	} catch (error) {
+		toast.error(error.message);
+		throw error;
+	}
+};
+
+//* action to reset password using token
+export const resetPassword = (token, password) => async () => {
+	try {
+		const { data } = await api.resetPassword(token, password);
+		toast.success(data.message || "Password has been reset");
+		return data;
+	} catch (error) {
+		toast.error(error.message);
+		throw error;
+	}
+};

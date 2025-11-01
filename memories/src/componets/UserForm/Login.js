@@ -1,9 +1,9 @@
-import { TextField, Button, Typography, Paper, IconButton, InputAdornment, Checkbox, FormControlLabel, LinearProgress } from "@material-ui/core";
+import { TextField, Button, Typography, Paper, IconButton, InputAdornment, Checkbox, FormControlLabel, LinearProgress, Dialog, DialogTitle, DialogContent, DialogActions } from "@material-ui/core";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { SvgIcon } from "@material-ui/core";
-import { loginUser } from "../../actions/Users";
+import { loginUser, forgotPassword as forgotPasswordAction } from "../../actions/Users";
 import { useDispatch } from "react-redux";
 import React, { useState } from "react";
 import useStyles from "./styles";
@@ -23,6 +23,8 @@ const Login = ({ currentId, setCurrentId }) => {
 	const [rememberMe, setRememberMe] = useState(false);
 	const [loading, setLoading] = useState(false);
 	const [errors, setErrors] = useState({ email: "", password: "" });
+	const [fpOpen, setFpOpen] = useState(false);
+	const [fpEmail, setFpEmail] = useState("");
 
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
@@ -142,7 +144,7 @@ const Login = ({ currentId, setCurrentId }) => {
 										</Typography>
 									}
 								/>
-								<Button className={classes.helperLink} size='small' color='primary' variant='text'>
+								<Button className={classes.helperLink} size='small' color='primary' variant='text' onClick={() => setFpOpen(true)}>
 									Forgot password?
 								</Button>
 							</div>
@@ -211,6 +213,32 @@ const Login = ({ currentId, setCurrentId }) => {
 					<img className={classes.illustration} src={hero} alt='Memories' />
 				</div>
 			</div>
+			<Dialog open={fpOpen} onClose={() => setFpOpen(false)} maxWidth='xs' fullWidth>
+				<DialogTitle>Forgot password</DialogTitle>
+				<DialogContent>
+					<Typography variant='body2' color='textSecondary'>Enter your account email, and we'll send a reset link.</Typography>
+					<TextField
+						autoFocus
+						margin='dense'
+						label='Email'
+						type='email'
+						fullWidth
+						value={fpEmail}
+						onChange={(e) => setFpEmail(e.target.value)}
+					/>
+				</DialogContent>
+				<DialogActions>
+					<Button onClick={() => setFpOpen(false)}>Cancel</Button>
+					<Button color='primary' variant='contained' onClick={async () => {
+						if (!fpEmail) return;
+						try {
+							await dispatch(forgotPasswordAction(fpEmail));
+							setFpOpen(false);
+							setFpEmail("");
+						} catch {}
+					}}>Send link</Button>
+				</DialogActions>
+			</Dialog>
 		</div>
 	);
 };
