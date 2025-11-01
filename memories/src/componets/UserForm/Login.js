@@ -10,6 +10,7 @@ import useStyles from "./styles";
 import { useNavigate } from "react-router-dom";
 import { ReactComponent as MemoriesLogo } from "../../svg/Memories-logo.svg";
 import hero from "../../images/memories.png";
+import { GOOGLE_OAUTH_START } from "../../config/urls";
 
 //* Login component for sign in form
 
@@ -167,8 +168,7 @@ const Login = ({ currentId, setCurrentId }) => {
 								<div className={classes.dividerLine} />
 							</div>
 							<Button className={classes.googleButton} fullWidth variant='outlined' onClick={() => {
-								const apiBase = process.env.REACT_APP_API_URL || "https://memories-backend-z796.onrender.com";
-								window.location.href = `${apiBase}/user/oauth/google/start`;
+								window.location.href = GOOGLE_OAUTH_START;
 							}} startIcon={
 								<SvgIcon viewBox='0 0 533.5 544.3' fontSize='small'>
 									<path fill='#4285F4' d='M533.5 278.4c0-17.4-1.6-34-4.6-50.2H272v95h146.9c-6.3 34-25 62.8-53.5 82.1v68h86.5c50.6-46.6 81.6-115.3 81.6-194.9z' />

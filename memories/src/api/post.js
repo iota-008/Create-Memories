@@ -1,6 +1,5 @@
 import axios from "axios";
-const API_BASE = process.env.REACT_APP_API_URL || "https://memories-backend-z796.onrender.com";
-const url = `${API_BASE}/posts`;
+import { POSTS_URL as url } from "../config/urls";
 
 const authHeaders = () => {
   const token = localStorage.getItem("auth-token");
