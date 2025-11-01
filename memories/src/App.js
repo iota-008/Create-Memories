@@ -7,25 +7,24 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import ResetPassword from "./componets/UserForm/ResetPassword";
 
 const App = () => {
-	const user = useSelector((state) => state.users);
-	const token = localStorage.getItem("auth-token");
-	const isLoggedIn = user.length && user[0] != null && token != null;
-	return (
-		<Routes>
-			{isLoggedIn ? (
-				<>
-					<Route path='/' element={<Home />} />
-					<Route path='*' element={<Navigate to='/' replace />} />
-				</>
-			) : (
-				<>
-					<Route path='/auth/login' element={<Login />} />
-					<Route path='/auth/register' element={<Register />} />
-					<Route path='/auth/reset' element={<ResetPassword />} />
-					<Route path='*' element={<Navigate to='/auth/login' replace />} />
-				</>
-			)}
-		</Routes>
-	);
+    const user = useSelector((state) => state.users);
+    const token = localStorage.getItem("auth-token");
+    const isLoggedIn = user.length && user[0] != null && token != null;
+    return (
+        <Routes>
+            {/* Home is accessible to both authenticated and unauthenticated users (read-only when unauthenticated) */}
+            <Route path='/' element={<Home />} />
+            {isLoggedIn ? (
+                <Route path='*' element={<Navigate to='/' replace />} />
+            ) : (
+                <>
+                    <Route path='/auth/login' element={<Login />} />
+                    <Route path='/auth/register' element={<Register />} />
+                    <Route path='/auth/reset' element={<ResetPassword />} />
+                    <Route path='*' element={<Navigate to='/' replace />} />
+                </>
+            )}
+        </Routes>
+    );
 };
 export default App;

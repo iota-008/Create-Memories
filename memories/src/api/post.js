@@ -19,6 +19,9 @@ export const updatePost = ( id, updatedPost ) => axios.patch( `${ url }/${ id }`
 //* api to delete posts
 export const deletePost = ( id ) => axios.delete( `${ url }/${ id }`, authHeaders() );
 
+// public read-only post fetch (no auth)
+export const fetchPublicPost = (id) => axios.get(`${url}/public/${id}`);
+
 //* api to react to posts (emoji reactions)
 export const reactToPost = (id, type) =>
   axios.patch(`${url}/${id}/react`, { type }, authHeaders());

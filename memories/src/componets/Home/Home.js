@@ -9,7 +9,7 @@ import {
 	Tooltip,
 } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
-import { getPosts } from "../../actions/Posts";
+import { getPosts, upsertSinglePostPublic } from "../../actions/Posts";
 import { logoutUser } from "../../actions/Users";
 import Post from "../Posts/Posts";
 import { useDispatch } from "react-redux";
@@ -33,9 +33,17 @@ const Home = () => {
 	const [currentId, setCurrentId] = useState(0);
 	const { mode, toggle } = React.useContext(ThemeModeContext);
 	const [layout, setLayout] = useState('list');
+	const isAuthenticated = Boolean(localStorage.getItem('auth-token'));
 
 	useEffect(() => {
-		dispatch(getPosts());
+		const params = new URLSearchParams(window.location.search);
+		const sharedId = params.get('post');
+		const token = localStorage.getItem('auth-token');
+		if (sharedId && !token) {
+			dispatch(upsertSinglePostPublic(sharedId));
+		} else {
+			dispatch(getPosts());
+		}
 	}, [dispatch]);
 
 	const handleLogout = () => {
@@ -70,32 +78,36 @@ const Home = () => {
 								{mode === "light" ? <Brightness4Icon /> : <Brightness7Icon />}
 							</IconButton>
 						</Tooltip>
-						<IconButton className={classes.headerIcon} onClick={handleLogout} size="small" aria-label="logout">
-							<ExitToAppIcon fontSize="default" />
-						</IconButton>
+						{isAuthenticated && (
+							<IconButton className={classes.headerIcon} onClick={handleLogout} size="small" aria-label="logout">
+								<ExitToAppIcon fontSize="default" />
+							</IconButton>
+						)}
 					</div>
 				</div>
 			</AppBar>
 
 			<Grow in>
 				<Container maxWidth='lg' className={classes.contentContainer}>
-						<Grid
-							className={classes.mainContainer}
-							container
-							justify='center'
-							alignItems='flex-start'
-							spacing={4}
-						>
-							<Grid item xs={12} sm={12} md={8}>
-								<Post setCurrentId={setCurrentId} layout={layout} />
-							</Grid>
+					<Grid
+						className={classes.mainContainer}
+						container
+						justify='center'
+						alignItems='flex-start'
+						spacing={4}
+					>
+						<Grid item xs={12} sm={12} md={8}>
+							<Post setCurrentId={setCurrentId} layout={layout} />
+						</Grid>
+						{isAuthenticated && (
 							<Grid item xs={12} sm={12} md={4}>
 								<Form currentId={currentId} setCurrentId={setCurrentId} />
 							</Grid>
-						</Grid>
-					</Container>
-				</Grow>
-			</React.Fragment>
-		);
+						)}
+					</Grid>
+				</Container>
+			</Grow>
+		</React.Fragment>
+	);
 };
 export default Home;

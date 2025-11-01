@@ -24,6 +24,7 @@ import { deletePost, reactToPost } from "../../../actions/Posts";
 import { getComments } from "../../../actions/Comments";
 import { useSelector, useDispatch } from "react-redux";
 import Comments from "./Comments";
+import toast from "react-hot-toast";
 
 //* Post component for each post
 
@@ -82,9 +83,46 @@ const Post = ({ post, setCurrentId }) => {
 		}
 	};
 
+	const handleShare = async () => {
+        try {
+            const shareUrl = `${window.location.origin}${window.location.pathname}?post=${post._id}`;
+            const shareText = post.message ? post.message.substring(0, 120) : 'Check out this memory!';
+            const shareTitle = post.title || 'Memories';
+
+            // Try Web Share with files if supported and image available
+            const canShareFiles = !!(navigator.canShare && window.File && window.Blob);
+            let shared = false;
+            if (navigator.share) {
+                try {
+                    if (canShareFiles && post.selectedFile && post.selectedFile.startsWith('data:')) {
+                        const res = await fetch(post.selectedFile);
+                        const blob = await res.blob();
+                        const file = new File([blob], `${shareTitle || 'memory'}.png`, { type: blob.type || 'image/png' });
+                        if (navigator.canShare({ files: [file] })) {
+                            await navigator.share({ title: shareTitle, text: shareText, files: [file] });
+                            shared = true;
+                        }
+                    }
+                    if (!shared) {
+                        await navigator.share({ title: shareTitle, text: shareText, url: shareUrl });
+                        shared = true;
+                    }
+                } catch (_) {
+                    // fall through to clipboard
+                }
+            }
+            if (!shared) {
+                await navigator.clipboard.writeText(shareUrl);
+                toast.success('Link copied to clipboard');
+            }
+        } catch (e) {
+            // Swallow user-cancel; no-op
+        }
+    };
+
 	return (
 		<Card className={classes.card}>
-			{post.userName === user.userName ? (
+			{user && post?.userName && post.userName === user.userName ? (
 				<div className={classes.overlay2}>
 					<IconButton
 						className={classes.headerAction}
@@ -159,7 +197,7 @@ const Post = ({ post, setCurrentId }) => {
 
 			{/* Reactions */}
 			<CardActions className={`${classes.cardActions} ${classes.reactionsBar}`}>
-				<IconButton onClick={openReactions} className={`${classes.actionButton} ${classes.reactionTrigger}`} size="small" aria-label="react">
+				<IconButton onClick={openReactions} className={`${classes.actionButton} ${classes.reactionTrigger}`} size="small" aria-label="react" disabled={!user}>
 					<Badge color="secondary" overlap="circle" badgeContent={totalReactions || null} anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
 						<span style={{ fontSize: 18 }}>{currentEmoji || '👍'}</span>
 					</Badge>
@@ -198,10 +236,10 @@ const Post = ({ post, setCurrentId }) => {
 					)}
 				</Popper>
 				<div style={{ flex: 1 }} />
-				<IconButton className={`${classes.actionButton} ${classes.commentButton}`} onClick={toggleComments} size="small" aria-label="comment">
+				<IconButton className={`${classes.actionButton} ${classes.commentButton}`} onClick={toggleComments} size="small" aria-label="comment" disabled={!user}>
 					<ChatBubbleOutlineIcon fontSize='small' />
 				</IconButton>
-				<IconButton className={`${classes.actionButton} ${classes.shareButton}`} onClick={() => {}} size="small" aria-label="share">
+				<IconButton className={`${classes.actionButton} ${classes.shareButton}`} onClick={handleShare} size="small" aria-label="share">
 					<ShareIcon fontSize='small' />
 				</IconButton>
 			</CardActions>

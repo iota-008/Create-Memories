@@ -19,6 +19,23 @@ export const getPosts = () => async (dispatch) => {
 	}
 };
 
+// Fetch a single post without auth (public route) and upsert into the posts array
+export const upsertSinglePostPublic = (id) => async (dispatch, getState) => {
+    try {
+        const { data } = await api.fetchPublicPost(id);
+        const post = data.post;
+        const state = getState();
+        const exists = (state.posts || []).some((p) => p._id === post._id);
+        if (exists) {
+            dispatch({ type: UPDATE, payload: { post } });
+        } else {
+            dispatch({ type: CREATE, payload: { post } });
+        }
+    } catch (error) {
+        toast.error(error.message);
+    }
+};
+
 //* action to create a new post
 export const createPost = (post) => async (dispatch) => {
 	try {
