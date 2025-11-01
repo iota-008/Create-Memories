@@ -6,26 +6,24 @@ import { Grid, CircularProgress, Typography } from "@material-ui/core";
 
 //* Posts compoent for rendering all posts
 
-const Posts = ({ setCurrentId, user }) => {
+const Posts = ({ setCurrentId, user, layout }) => {
 	const posts = useSelector((state) => state.posts);
 	const classes = useStyles();
 
 	return posts.length === 0 ? (
-		<div>
-			<Typography variant='h6' size='medium'>
-				Don't have any posts to show now!
-			</Typography>
-			<CircularProgress />
+		<div className={classes.emptyState}>
+			<Typography variant='h6'>Don't have any posts to show now!</Typography>
+			<CircularProgress color='primary' />
 		</div>
 	) : (
 		<Grid
 			className={classes.container}
 			container
 			alignItems='stretch'
-			spacing={3}
+			spacing={layout === 'list' ? 3 : 4}
 		>
 			{posts.map((post) => (
-				<Grid key={post._id} xs={12} xm={6} md={6} item>
+				<Grid key={post._id} item xs={12} sm={layout === 'list' ? 12 : 6}>
 					<Post post={post} setCurrentId={setCurrentId} user={user} />
 				</Grid>
 			))}

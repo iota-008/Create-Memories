@@ -63,3 +63,15 @@ export const likePost = (id) => async (dispatch) => {
 		toast.error(error.message);
 	}
 };
+
+// action to react to a post with an emoji type (e.g., "👍", "❤️", "😂", "😮", "🎉").
+export const reactToPost = (id, type) => async (dispatch) => {
+	try {
+		const { data } = await api.reactToPost(id, type);
+		toast.success(data.message);
+		// Backend returns { post, message }, reuse UPDATE to replace the post in store
+		dispatch({ type: UPDATE, payload: data });
+	} catch (error) {
+		toast.error(error.message);
+	}
+};
