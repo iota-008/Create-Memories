@@ -1,13 +1,6 @@
 import { makeStyles } from "@material-ui/core/styles";
 
 export default makeStyles((theme) => ({
-  mediaWrapper: {
-    position: 'relative',
-    overflow: 'hidden',
-    borderTopLeftRadius: 14,
-    borderTopRightRadius: 14,
-    background: 'linear-gradient(135deg, rgba(139,92,246,0.20), rgba(236,72,153,0.20), rgba(249,115,22,0.20))'
-  },
   reactionTrigger: {
     background: 'linear-gradient(90deg, #8B5CF6 0%, #EC4899 100%)',
     color: '#fff',
@@ -16,13 +9,7 @@ export default makeStyles((theme) => ({
       boxShadow: '0 8px 20px rgba(139,92,246,0.45)'
     }
   },
-  media: {
-    height: 0,
-    paddingTop: '56.25%',
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
-    backgroundBlendMode: "darken",
-    transition: 'transform 500ms ease',
-  },
+  
   mediaOverlay: {
     position: 'absolute',
     inset: 0,
@@ -31,10 +18,7 @@ export default makeStyles((theme) => ({
     transition: 'opacity 300ms ease',
     pointerEvents: 'none',
   },
-  mediaHover: {
-    '& $media': { transform: 'scale(1.10)' },
-    '& $mediaOverlay': { opacity: 1 }
-  },
+  
   mediaBox: {
     position: 'relative',
     overflow: 'hidden',
@@ -66,12 +50,7 @@ export default makeStyles((theme) => ({
       boxShadow: '0 12px 30px rgba(0,0,0,0.12)'
     }
   },
-  border: {
-    border: "solid",
-  },
-  fullHeightCard: {
-    height: "100%",
-  },
+  
   header: {
     padding: theme.spacing(2),
     background: 'linear-gradient(90deg, rgba(139,92,246,0.05) 0%, rgba(236,72,153,0.05) 50%, rgba(249,115,22,0.05) 100%)',
@@ -113,17 +92,7 @@ export default makeStyles((theme) => ({
     pointerEvents: 'auto',
     transform: 'none',
   },
-  grid: {
-    display: "flex",
-  },
-  details: {
-    display: "flex",
-    justifyContent: "space-between",
-    margin: "20px",
-  },
-  title: {
-    padding: "0 16px",
-  },
+  
   cardActions: {
     padding: theme.spacing(2),
     display: 'flex',
@@ -139,22 +108,7 @@ export default makeStyles((theme) => ({
     fontWeight: 700,
     textTransform: 'none',
   },
-  reactionButton: {
-    minWidth: 40,
-    padding: theme.spacing(0.75, 1),
-    borderRadius: 12,
-    background: 'linear-gradient(90deg, rgba(139,92,246,0.15) 0%, rgba(236,72,153,0.15) 100%)',
-    color: theme.palette.text.primary,
-    boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
-    '&:hover': {
-      background: 'linear-gradient(90deg, rgba(139,92,246,0.25) 0%, rgba(236,72,153,0.25) 100%)',
-    }
-  },
-  reactionActive: {
-    background: 'linear-gradient(90deg, #8B5CF6 0%, #EC4899 100%)',
-    color: '#fff',
-    boxShadow: '0 6px 16px rgba(139,92,246,0.35)'
-  },
+  
   reactionsPopperPaper: {
     padding: theme.spacing(1),
     borderRadius: 999,
@@ -198,10 +152,7 @@ export default makeStyles((theme) => ({
     fontSize: 12,
     opacity: 0.8,
   },
-  likeButton: {
-    background: 'linear-gradient(90deg, #8B5CF6 0%, #EC4899 100%)',
-    color: '#fff',
-  },
+  
   commentButton: {
     background: 'linear-gradient(90deg, rgba(236,72,153,0.20) 0%, rgba(249,115,22,0.20) 100%)',
     color: '#EC4899',

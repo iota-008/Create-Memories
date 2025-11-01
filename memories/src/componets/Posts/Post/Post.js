@@ -14,16 +14,13 @@ import {
 	Grow,
 	ClickAwayListener,
 } from "@material-ui/core";
-import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 import ChatBubbleOutlineIcon from "@material-ui/icons/ChatBubbleOutline";
 import ShareIcon from "@material-ui/icons/Share";
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import useStyles from "./styles";
 import moment from "moment";
-import { deletePost, likePost, reactToPost } from "../../../actions/Posts";
+import { deletePost, reactToPost } from "../../../actions/Posts";
 import { getComments } from "../../../actions/Comments";
 import { useSelector, useDispatch } from "react-redux";
 import Comments from "./Comments";
@@ -56,13 +53,15 @@ const Post = ({ post, setCurrentId }) => {
 	};
 	const currentReaction = (post.reactions || []).find((r) => (r.user === (user?._id) || r.user?._id === (user?._id)));
 	const currentEmoji = toEmoji(currentReaction?.type) || undefined;
-	const reactionCountsRaw = (post.reactions || []).reduce((acc, r) => {
+	const reactionCountsRaw = (post.reactionsBreakdown) ? post.reactionsBreakdown : (post.reactions || []).reduce((acc, r) => {
 		const e = toEmoji(r.type);
 		if (EMOJIS.includes(e)) acc[e] = (acc[e] || 0) + 1;
 		return acc;
 	}, {});
-	const reactionCounts = EMOJIS.reduce((m, e) => (m[e] = reactionCountsRaw[e] || 0, m), {});
-	const totalReactions = Object.values(reactionCounts).reduce((a, b) => a + b, 0);
+	const reactionCounts = EMOJIS.reduce((m, e) => (m[e] = (reactionCountsRaw && reactionCountsRaw[e]) || 0, m), {});
+	const totalReactions = (typeof post.reactionsCount === 'number')
+		? post.reactionsCount
+		: Object.values(reactionCounts).reduce((a, b) => a + b, 0);
 	const handleSelectReaction = (emoji) => {
 		const active = (currentEmoji && currentEmoji === emoji);
 		dispatch(reactToPost(post._id, active ? "" : emoji));

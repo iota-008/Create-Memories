@@ -4,7 +4,6 @@ import * as api from "../api/post.js";
 import {
 	FETCH_ALL,
 	CREATE,
-	LIKE,
 	UPDATE,
 	DELETE,
 } from "../constants/actionTypes";
@@ -48,17 +47,6 @@ export const deletePost = (id) => async (dispatch) => {
 		const { data } = await api.deletePost(id);
 		toast.success(data.message);
 		dispatch({ type: DELETE, payload: data });
-	} catch (error) {
-		toast.error(error.message);
-	}
-};
-
-//* action to like/dislike a post
-export const likePost = (id) => async (dispatch) => {
-	try {
-		const { data } = await api.likePost(id);
-		toast.success(data.message);
-		dispatch({ type: LIKE, payload: data });
 	} catch (error) {
 		toast.error(error.message);
 	}

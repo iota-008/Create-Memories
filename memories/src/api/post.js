@@ -19,10 +19,6 @@ export const updatePost = ( id, updatedPost ) => axios.patch( `${ url }/${ id }`
 //* api to delete posts
 export const deletePost = ( id ) => axios.delete( `${ url }/${ id }`, authHeaders() );
 
-//* api to like posts
-export const likePost = ( id ) =>
-  axios.patch( `${ url }/${ id }/likePost`, {}, authHeaders() );
-
 //* api to react to posts (emoji reactions)
 export const reactToPost = (id, type) =>
   axios.patch(`${url}/${id}/react`, { type }, authHeaders());
