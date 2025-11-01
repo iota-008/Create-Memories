@@ -5,7 +5,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { SvgIcon } from "@material-ui/core";
 import { loginUser, forgotPassword as forgotPasswordAction } from "../../actions/Users";
 import { useDispatch } from "react-redux";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import useStyles from "./styles";
 import { useNavigate } from "react-router-dom";
 import { ReactComponent as MemoriesLogo } from "../../svg/Memories-logo.svg";
@@ -30,6 +30,18 @@ const Login = ({ currentId, setCurrentId }) => {
 	const navigate = useNavigate();
 
 	const classes = useStyles();
+
+	// Handle OAuth redirect: /auth/login?oauth=1&token=...
+	useEffect(() => {
+		const params = new URLSearchParams(window.location.search);
+		const oauth = params.get('oauth');
+		const token = params.get('token');
+		if (oauth === '1' && token) {
+			localStorage.setItem('auth-token', token);
+			dispatch({ type: 'LOGIN', payload: token });
+			navigate('/', { replace: true });
+		}
+	}, [dispatch, navigate]);
 
 	const clear = () => {
 		setUserData({
@@ -154,7 +166,10 @@ const Login = ({ currentId, setCurrentId }) => {
 								<Typography variant='caption' color='textSecondary'>or</Typography>
 								<div className={classes.dividerLine} />
 							</div>
-							<Button className={classes.googleButton} fullWidth variant='outlined' startIcon={
+							<Button className={classes.googleButton} fullWidth variant='outlined' onClick={() => {
+								const apiBase = process.env.REACT_APP_API_URL || "https://memories-backend-z796.onrender.com";
+								window.location.href = `${apiBase}/user/oauth/google/start`;
+							}} startIcon={
 								<SvgIcon viewBox='0 0 533.5 544.3' fontSize='small'>
 									<path fill='#4285F4' d='M533.5 278.4c0-17.4-1.6-34-4.6-50.2H272v95h146.9c-6.3 34-25 62.8-53.5 82.1v68h86.5c50.6-46.6 81.6-115.3 81.6-194.9z' />
 									<path fill='#34A853' d='M272 544.3c72.9 0 134.1-24.1 178.8-65.6l-86.5-68c-24 16.1-54.7 25.7-92.3 25.7-70.9 0-131-47.8-152.4-112.1h-90v70.6c44.6 88.2 136.2 149.4 242.4 149.4z' />
