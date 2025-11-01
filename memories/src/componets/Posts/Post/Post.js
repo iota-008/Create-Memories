@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
 	Card,
 	CardActions,
@@ -13,15 +13,27 @@ import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import useStyles from "./styles";
 import moment from "moment";
 import { deletePost, likePost } from "../../../actions/Posts";
+import { getComments } from "../../../actions/Comments";
 import { useSelector, useDispatch } from "react-redux";
+import Comments from "./Comments";
 
-//* Post component for each post card
+//* Post component for each post
 
 const Post = ({ post, setCurrentId }) => {
 	const dispatch = useDispatch();
 	const classes = useStyles();
+	const [showComments, setShowComments] = useState(false);
 
 	const user = useSelector((state) => state.users)[0];
+	const commentsByPost = useSelector((state) => state.comments[post._id] || []);
+
+	const toggleComments = () => {
+		const next = !showComments;
+		setShowComments(next);
+		if (next && commentsByPost.length === 0) {
+			dispatch(getComments(post._id));
+		}
+	};
 
 	return (
 		<Card className={classes.card}>
@@ -75,6 +87,9 @@ const Post = ({ post, setCurrentId }) => {
 					&nbsp; Like &nbsp;
 					{post.likeCount}
 				</Button>
+				<Button size='small' color='primary' onClick={toggleComments}>
+					Comments {commentsByPost.length ? `(${commentsByPost.length})` : ""}
+				</Button>
 				{post.userName === user.userName ? (
 					<Button
 						size='small'
@@ -86,6 +101,11 @@ const Post = ({ post, setCurrentId }) => {
 					</Button>
 				) : null}
 			</CardActions>
+			{showComments && (
+				<div style={{ padding: "0 16px 16px" }}>
+					<Comments postId={post._id} />
+				</div>
+			)}
 		</Card>
 	);
 };
