@@ -4,6 +4,7 @@ import MailOutlineIcon from "@material-ui/icons/MailOutline";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { SvgIcon } from "@material-ui/core";
 import { loginUser, forgotPassword as forgotPasswordAction } from "../../actions/Users";
+import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import React, { useEffect, useState } from "react";
 import useStyles from "./styles";
@@ -32,15 +33,28 @@ const Login = ({ currentId, setCurrentId }) => {
 
 	const classes = useStyles();
 
-	// Handle OAuth redirect: /auth/login?oauth=1&token=...
+	// Handle OAuth redirect: /auth/login?oauth=1&token=... or ?oauth=0&error=...
 	useEffect(() => {
 		const params = new URLSearchParams(window.location.search);
 		const oauth = params.get('oauth');
 		const token = params.get('token');
+		const error = params.get('error');
 		if (oauth === '1' && token) {
 			localStorage.setItem('auth-token', token);
 			dispatch({ type: 'LOGIN', payload: token });
 			navigate('/', { replace: true });
+		} else if (oauth === '0') {
+			let message = 'Google sign-in failed';
+			if (error === 'state') message = 'Sign-in failed: invalid session. Please try again.';
+			else if (error === 'token') message = 'Sign-in failed: could not obtain access token.';
+			else if (error === 'profile') message = 'Sign-in failed: could not fetch profile.';
+			toast.error(message);
+			// Clean the query string to avoid repeated toasts on refresh
+			const url = new URL(window.location.href);
+			url.searchParams.delete('oauth');
+			url.searchParams.delete('error');
+			url.searchParams.delete('token');
+			window.history.replaceState({}, document.title, url.toString());
 		}
 	}, [dispatch, navigate]);
 
