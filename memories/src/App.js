@@ -5,6 +5,7 @@ import React from "react";
 import Login from "./componets/UserForm/Login";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import ResetPassword from "./componets/UserForm/ResetPassword";
+import { Toaster } from "react-hot-toast";
 
 const App = () => {
     const user = useSelector((state) => state.users);
@@ -14,6 +15,25 @@ const App = () => {
     const params = new URLSearchParams(location.search);
     const sharedId = params.get('post');
     return (
+        <>
+        <Toaster position="top-center"
+            toastOptions={{
+                duration: 3500,
+                style: {
+                    background: '#111827',
+                    color: '#fff',
+                    borderRadius: '12px',
+                    padding: '10px 14px',
+                    boxShadow: '0 10px 25px rgba(0,0,0,0.25)'
+                },
+                success: {
+                    iconTheme: { primary: '#10B981', secondary: '#111827' }
+                },
+                error: {
+                    iconTheme: { primary: '#EF4444', secondary: '#111827' }
+                }
+            }}
+        />
         <Routes>
             {isLoggedIn ? (
                 <>
@@ -31,6 +51,7 @@ const App = () => {
                 </>
             )}
         </Routes>
+        </>
     );
 };
 export default App;
