@@ -4,7 +4,6 @@ import {
 	Typography,
 	Grid,
 	Grow,
-	Button,
 	IconButton,
 	Tooltip,
 } from "@material-ui/core";

@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addComment, removeComment } from "../../../actions/Comments";
-import { TextField, Typography, Divider, IconButton, Paper } from "@material-ui/core";
+import { TextField, Typography, IconButton, Paper } from "@material-ui/core";
 import SendIcon from "@material-ui/icons/Send";
 import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
 

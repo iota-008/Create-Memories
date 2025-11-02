@@ -112,18 +112,6 @@ export default makeStyles((theme) => ({
     alignItems: "center",
     gap: theme.spacing(1),
   },
-  buttonLogout: {
-    background: 'linear-gradient(90deg, #8B5CF6 0%, #EC4899 50%, #F97316 100%)',
-    color: '#FFFFFF',
-    borderRadius: 10,
-    padding: 6,
-    boxShadow: '0 6px 16px rgba(139,92,246,0.35)',
-    '& svg': { fill: '#FFFFFF' },
-    '& path': { fill: '#FFFFFF' },
-    '&:hover': {
-      boxShadow: '0 8px 20px rgba(139,92,246,0.45)'
-    },
-  },
   image: {
     marginLeft: "15px",
   },

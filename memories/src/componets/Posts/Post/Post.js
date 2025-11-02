@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
 	Card,
 	CardActions,
 	CardContent,
 	CardMedia,
-	Button,
 	Typography,
 	Avatar,
 	IconButton,
@@ -61,7 +60,10 @@ const Post = ({ post, setCurrentId }) => {
 		if (EMOJIS.includes(e)) acc[e] = (acc[e] || 0) + 1;
 		return acc;
 	}, {});
-	const reactionCounts = EMOJIS.reduce((m, e) => (m[e] = (reactionCountsRaw && reactionCountsRaw[e]) || 0, m), {});
+	const reactionCounts = EMOJIS.reduce((m, e) => {
+		m[e] = reactionCountsRaw?.[e] || 0;
+		return m;
+	}, {});
 	const totalReactions = (typeof post.reactionsCount === 'number')
 		? post.reactionsCount
 		: Object.values(reactionCounts).reduce((a, b) => a + b, 0);
