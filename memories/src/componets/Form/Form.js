@@ -17,7 +17,7 @@ const Form = ({ currentId, setCurrentId }) => {
 		message: "",
 		tags: "",
 		selectedFile: "",
-		userName: user.userName,
+		userName: user?.userName || "",
 	});
 	const post = useSelector((state) =>
 		currentId ? state.posts.find((post) => post._id === currentId) : 0
@@ -31,6 +31,12 @@ const Form = ({ currentId, setCurrentId }) => {
 		}
 	}, [post]);
 
+	useEffect(() => {
+		if (user?.userName) {
+			setPostData(prev => ({ ...prev, userName: user.userName }));
+		}
+	}, [user?.userName]);
+
 	const clear = () => {
 		setCurrentId(0);
 		setPostData({
@@ -39,6 +45,7 @@ const Form = ({ currentId, setCurrentId }) => {
 			message: "",
 			tags: "",
 			selectedFile: "",
+			userName: user?.userName || "",
 		});
 	};
 
