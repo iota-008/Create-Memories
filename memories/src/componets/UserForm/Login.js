@@ -9,7 +9,6 @@ import { useDispatch } from "react-redux";
 import React, { useEffect, useState } from "react";
 import useStyles from "./styles";
 import { useNavigate } from "react-router-dom";
-import { ReactComponent as MemoriesLogo } from "../../svg/Memories-logo.svg";
 import hero from "../../images/memories.png";
 import { GOOGLE_OAUTH_START } from "../../config/urls";
 
@@ -233,7 +232,6 @@ const Login = ({ currentId, setCurrentId }) => {
 				</div>
 				<div className={classes.rightPanel}>
 					<div className={classes.brand}>
-						<MemoriesLogo width={28} height={28} />
 						<Typography variant='h6'>Memories</Typography>
 					</div>
 					<Typography className={classes.brandTagline} variant='subtitle1'>

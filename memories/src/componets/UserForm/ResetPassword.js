@@ -6,7 +6,6 @@ import { useDispatch } from "react-redux";
 import { resetPassword as resetPasswordAction } from "../../actions/Users";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import { ReactComponent as MemoriesLogo } from "../../svg/Memories-logo.svg";
 import hero from "../../images/memories.png";
 
 function useQuery() {
@@ -111,7 +110,6 @@ const ResetPassword = () => {
       </div>
       <div className={classes.rightPanel}>
         <div className={classes.brand}>
-          <MemoriesLogo width={28} height={28} />
           <Typography variant='h6'>Memories</Typography>
         </div>
         <Typography className={classes.brandTagline} variant='subtitle1'>

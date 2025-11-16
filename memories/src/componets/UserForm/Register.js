@@ -10,7 +10,6 @@ import { useDispatch } from "react-redux";
 import React, { useState } from "react";
 import useStyles from "./styles";
 import { useNavigate } from "react-router-dom";
-import { ReactComponent as MemoriesLogo } from "../../svg/Memories-logo.svg";
 import hero from "../../images/memories.png";
 
 //* Register component for signup form
@@ -220,7 +219,6 @@ const Register = ({ currentId, setCurrentId }) => {
 				</div>
 				<div className={classes.rightPanel}>
 					<div className={classes.brand}>
-						<MemoriesLogo width={28} height={28} />
 						<Typography variant='h6'>Memories</Typography>
 					</div>
 					<Typography className={classes.brandTagline} variant='subtitle1'>
