@@ -6,7 +6,7 @@
 
 # 🎨 Memories - Modern React Social Platform
 
-A sleek, responsive social media application built with React ecosystem best practices. This project showcases advanced frontend development skills including state management, component architecture, API integration, and modern UI/UX design.
+A sleek, responsive social media application built with React ecosystem best practices. This project showcases advanced frontend development skills, including state management, component architecture, API integration, and modern UI/UX design.
 
 **Memories** is an interactive social platform where users can share, discover, and engage with memorable experiences through posts and comments. The frontend delivers a seamless user experience with real-time updates, responsive design, and intuitive navigation.
 
@@ -17,15 +17,15 @@ A sleek, responsive social media application built with React ecosystem best pra
 - **API Documentation**: [https://memories-api.duckdns.org/docs](https://memories-api.duckdns.org/docs)
 
 ## 🎬 Demo Video
+https://youtu.be/2kZqokwvlFo - [UPDATED]
 
-https://user-images.githubusercontent.com/46680697/150508268-21ddf456-f458-40a3-b889-0ec14d5da699.mp4
+https://youtu.be/kri6_hBkdBo - [OLD]
 
 ## 📱 Screenshots
 
 <div align="center">
-  <img src="https://i.ibb.co/MnWw9cG/1.png" alt="Sign Up" width="30%" />
-  <img src="https://i.ibb.co/4NHzcm1/2.png" alt="Sign In" width="30%" />
-  <img src="https://i.ibb.co/VYqRCqM/3.png" alt="Home Page" width="30%" />
+  <img alt="Home Page" src="https://github.com/user-attachments/assets/2180ef0e-5c44-414b-9ede-846da9ed9e93" />
+  <img alt="Login Page" src="https://github.com/user-attachments/assets/974e917e-2927-43a1-ab02-84bc3703aa7f" />
 </div>
 
 ## 🛠️ Tech Stack & Architecture
@@ -50,7 +50,7 @@ https://user-images.githubusercontent.com/46680697/150508268-21ddf456-f458-40a3-
 - **ESLint**: Code quality and consistency
 - **React Testing Library**: Component testing utilities
 
-![Logo](https://i.ibb.co/qDG1gLL/Memories-logo.png)
+<img width="549" height="455" alt="Memories-logo" src="https://github.com/user-attachments/assets/b84f5984-e8f2-4885-9d25-6e18ff12afe4" />
 
 ## ✨ Key Features & Skills Demonstrated
 
@@ -72,10 +72,10 @@ https://user-images.githubusercontent.com/46680697/150508268-21ddf456-f458-40a3-
 - Dark/light theme support (extensible)
 
 ### 🔄 State Management Excellence
-- Centralized Redux store architecture
+- Centralised Redux store architecture
 - Async actions with Redux-Thunk
-- Normalized state structure for complex data
-- Efficient re-rendering with memoization
+- Normalised state structure for complex data
+- Efficient re-rendering with memoisation
 
 ### 📱 Mobile-First Responsive Design
 - Adaptive layouts for all screen sizes
@@ -105,7 +105,7 @@ The application will launch at `http://localhost:3000` with automatic API proxyi
 
 ### Build for Production
 ```bash
-# Create optimized production build
+# Create optimised production build
 npm run build
 
 # Preview production build locally
@@ -121,9 +121,9 @@ serve -s build
 - **Custom Hooks**: Business logic abstraction
 - **Higher-Order Components**: Cross-cutting concerns
 
-### Performance Optimizations
+### Performance Optimisations
 - **Code Splitting**: Lazy loading with React.lazy()
-- **Memoization**: React.memo and useMemo for expensive operations
+- **Memoisation**: React.memo and useMemo for expensive operations
 - **Bundle Analysis**: Optimized imports and tree shaking
 
 ### Developer Experience
@@ -140,7 +140,7 @@ User Action → Dispatch Action → Redux Thunk → API Call → Update Store �
 This pattern demonstrates expertise in:
 - Asynchronous data flow
 - Side effect management
-- UI state synchronization
+- UI state synchronisation
 - Error handling and loading states
 
 ## 🎯 Learning Outcomes & Skills
@@ -150,7 +150,7 @@ This project demonstrates proficiency in:
 - **State Management**: Redux ecosystem and patterns
 - **API Integration**: RESTful client implementation
 - **UI/UX Design**: Material Design and responsive principles
-- **Performance**: Optimization techniques and best practices
+- **Performance**: Optimisation techniques and best practices
 - **Deployment**: CI/CD with Netlify and build processes
 
 ## 👨‍💻 Developer
@@ -160,5 +160,3 @@ This project demonstrates proficiency in:
 - LinkedIn: [Connect](https://linkedin.com/in/ankit-raibole)
 
 ---
-
-*Built with ❤️ using React ecosystem. Showcases modern frontend development and UI/UX expertise.*
